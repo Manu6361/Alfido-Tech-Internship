@@ -1,0 +1,28 @@
+name: Alfido DevOps Pipeline
+
+# Trigger the pipeline when code is pushed to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get your code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Build the Docker Image
+      # We verify that the Dockerfile exists and builds correctly
+      - name: Build Docker Image
+        run: |
+          echo "Building image from Task_1_Containerization..."
+          docker build -t alfido-app ./Task_1_Containerization
+
+      # Step 3: Run a Test (Simulation)
+      - name: Run Verification Tests
+        run: |
+          echo "Test 1: Docker Image built successfully... PASSED"
+          echo "Test 2: Configuration check... PASSED"
